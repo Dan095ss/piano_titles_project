@@ -136,9 +136,9 @@ while lost == 0:
             if score >= 10:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 15:
+                if score >= 20:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 20:
+                    if score >= 50:
                         screen.blit(ed_star, (80, 10))  # меняем цвет всех клавиш на золотой + добавляем 3-ю звезду
                         pygame.time.wait(500)
                         done = True
@@ -163,7 +163,7 @@ if done == False:
     screen.blit(ed_hearth, (350, 400))
     msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
     pygame.display.update()
-    # pygame.time.wait(4000)
+    pygame.time.wait(7000)
     # pygame.quit()
     # quit()
 
