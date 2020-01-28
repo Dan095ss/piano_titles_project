@@ -144,7 +144,7 @@ while lost == 0:
 
 pygame.mixer.music.stop()
 msg(screen, "YOU LOSE ", color=(110, 128, 225), size=100, pos=(-1, -1))
-msg(screen, "by team with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
+msg(screen, "by Dan095SS with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
 screen.blit(ed_hearth, (350, 400))
 msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
 pygame.display.update()
