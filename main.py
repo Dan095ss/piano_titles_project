@@ -87,6 +87,8 @@ sb = []
 speed = 8
 score = 0
 
+done = False
+
 while lost == 0:
     #for i in range (10):
     for i in map_one:
@@ -131,24 +133,37 @@ while lost == 0:
                         mufall.play()
                     score += 1
             msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
-            if score >= 1:
+            if score >= 10:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 50:
+                if score >= 20:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 75:
+                    if score >= 50:
                         screen.blit(ed_star, (80, 10))  # меняем цвет всех клавиш на золотой + добавляем 3-ю звезду
+                        pygame.time.wait(500)
+                        done = True
+                        screen.blit(ed_star, (20, 10))
+                        if aac == 3:
+                            screen.fill((b, c, ac))
+                        if aac == 2:
+                            screen.fill((c, ac, b))
+                        else:
+                            screen.fill((ac, c, b))
+                        pygame.mixer.music.stop()
+                        msg(screen, "Ты победил!!!", color=(110, 128, 225), size=55, pos=(-1, -1))
+                        msg(screen, "Сделано в России", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
 
             pygame.display.update()
     speed += 1
 
-pygame.mixer.music.stop()
-msg(screen, "YOU LOSE ", color=(110, 128, 225), size=100, pos=(-1, -1))
-msg(screen, "by Dan095SS with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
-screen.blit(ed_hearth, (350, 400))
-msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
-pygame.display.update()
-pygame.time.wait(4000)
-# pygame.quit()
-# quit()
+if done == False:
+    pygame.mixer.music.stop()
+    msg(screen, "YOU LOSE ", color=(110, 128, 225), size=100, pos=(-1, -1))
+    msg(screen, "by Dan095SS with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
+    screen.blit(ed_hearth, (350, 400))
+    msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
+    pygame.display.update()
+    pygame.time.wait(7000)
+    # pygame.quit()
+    # quit()
 
