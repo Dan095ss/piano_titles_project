@@ -131,18 +131,33 @@ while lost == 0:
                         mufall.play()
                     score += 1
             msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
-            if score >= 1:
+            if score >= 15:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 50:
+                if score >= 20:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 75:
-                        screen.blit(ed_star, (80, 10))  # меняем цвет всех клавиш на золотой + добавляем 3-ю звезду
-
+                    if score >= 40:
+                        screen.blit(ed_star, (80, 10))
+                        pygame.mixer.music.stop()
+                        if aac == 3:
+                            screen.fill((b, c, ac))
+                        if aac == 2:
+                            screen.fill((c, ac, b))
+                        else:
+                            screen.fill((ac, c, b))
+                        msg(screen, "Ты победил!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
+                        pygame.display.update()
+                        pygame.time.wait(4000)
             pygame.display.update()
     speed += 1
 
 pygame.mixer.music.stop()
+if aac == 3:
+    screen.fill((b, c, ac))
+if aac == 2:
+    screen.fill((c, ac, b))
+else:
+    screen.fill((ac, c, b))
 msg(screen, "YOU LOSE ", color=(110, 128, 225), size=100, pos=(-1, -1))
 msg(screen, "by Dan095SS with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
 screen.blit(ed_hearth, (350, 400))
