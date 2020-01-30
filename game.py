@@ -131,14 +131,16 @@ while lost == 0:
                         mufall.play()
                     score += 1
             msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
-            if score >= 15:
+            if score >= 1:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 20:
+                if score >= 2:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 40:
+                    if score >= 3:
                         screen.blit(ed_star, (80, 10))
                         pygame.mixer.music.stop()
+                        pygame.mixer.music.load("data/win.mp3")  # a.mp3
+                        pygame.mixer.music.play(-1)
                         if aac == 3:
                             screen.fill((b, c, ac))
                         if aac == 2:
@@ -148,10 +150,13 @@ while lost == 0:
                         msg(screen, "Ты победил!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
                         pygame.display.update()
                         pygame.time.wait(4000)
+                        quit()
             pygame.display.update()
     speed += 1
 
 pygame.mixer.music.stop()
+pygame.mixer.music.load("data/fail.mp3")  # a.mp3
+pygame.mixer.music.play(-1)
 if aac == 3:
     screen.fill((b, c, ac))
 if aac == 2:
