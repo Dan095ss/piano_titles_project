@@ -1,3 +1,4 @@
+from main_menu import speed
 import pygame
 import os
 import random
@@ -84,7 +85,6 @@ lost = 0
 time = 0
 delt = 60
 sb = []
-speed = 8
 score = 0
 
 while lost == 0:
