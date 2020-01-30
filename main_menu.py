@@ -150,24 +150,6 @@ def main(test=False):
                                 window_height=WINDOW_SIZE[1],
                                 window_width=WINDOW_SIZE[0]
                                 )
-
-    play_submenu = pygameMenu.Menu(surface,
-                                   bgfun=main_background,
-                                   color_selected=COLOR_WHITE,
-                                   font=pygameMenu.font.FONT_BEBAS,
-                                   font_color=COLOR_BLACK,
-                                   font_size=30,
-                                   menu_alpha=100,
-                                   menu_color=MENU_BACKGROUND_COLOR,
-                                   menu_height=int(WINDOW_SIZE[1] * 0.5),
-                                   menu_width=int(WINDOW_SIZE[0] * 0.7),
-                                   option_shadow=False,
-                                   title='Submenu',
-                                   window_height=WINDOW_SIZE[1],
-                                   window_width=WINDOW_SIZE[0]
-                                   )
-    play_submenu.add_option('Back', pygameMenu.events.BACK)
-
     play_menu.add_option('Start',  # When pressing return -> play(DIFFICULTY[0], font)
                          play_function,
                          DIFFICULTY,
@@ -178,7 +160,6 @@ def main(test=False):
                             ('3 - Hard', 'HARD')],
                            onchange=change_difficulty,
                            selector_id='select_difficulty')
-    play_menu.add_option('Another menu', play_submenu)
     play_menu.add_option('Return to main menu', pygameMenu.events.BACK)
 
     # About menu
