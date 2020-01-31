@@ -150,12 +150,12 @@ while lost == 0:
             # while is_pause:
             #     pygame.time.wait(1)
             msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
-            if score >= 1:
+            if score >= 10:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 2:
+                if score >= 15:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 3:
+                    if score >= 20:
                         screen.blit(ed_star, (80, 10))
                         pygame.mixer.music.stop()
                         pygame.mixer.music.load("data/win.mp3")  # a.mp3
