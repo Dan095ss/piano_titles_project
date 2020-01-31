@@ -4,6 +4,8 @@ sys.path.insert(0, '../../')
 
 speed = 5
 
+map_one = []
+
 import os
 from random import randrange
 import pygame
@@ -18,7 +20,7 @@ ABOUT = ['Author: @{0}'.format('Dan095ss'),
 COLOR_BACKGROUND = (128, 0, 128)
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
-DIFFICULTY = ['EASY']
+SELECT_MAP = ['1']
 FPS = 60.0
 MENU_BACKGROUND_COLOR = (228, 55, 36)
 WINDOW_SIZE = (640, 480)
@@ -27,43 +29,39 @@ clock = None
 main_menu = None
 surface = None
 
-
 # -----------------------------------------------------------------------------
 # Methods
 # -----------------------------------------------------------------------------
-def change_difficulty(value, difficulty):
+def change_map(value, level):
     selected, index = value
-    print('Selected difficulty: "{0}" ({1}) at index {2}'.format(selected, difficulty, index))
-    DIFFICULTY[0] = difficulty
+    print('Selected difficulty: "{0}" ({1}) at index {2}'.format(selected, level, index))
+    SELECT_MAP[0] = level
 
 
 def random_color():
     return randrange(0, 255), randrange(0, 255), randrange(0, 255)
 
 
-def play_function(difficulty, font, test=False):
-    assert isinstance(difficulty, (tuple, list))
-    difficulty = difficulty[0]
-    assert isinstance(difficulty, str)
+def play_function(level, test=False):
+    assert isinstance(level, (tuple, list))
+    level = level[0]
+    assert isinstance(level, str)
 
     # Define globals
     global main_menu
     global clock
 
-    if difficulty == 'EASY':
-        speed = 4
+    if level == '1':
         os.system('python game.py')
         sys.exit()
-    elif difficulty == 'MEDIUM':
-        speed = 6
+    elif level == '2':
         os.system('python game.py')
         sys.exit()
-    elif difficulty == 'HARD':
-        speed = 8
+    elif level == '3':
         os.system('python game.py')
         sys.exit()
     else:
-        raise Exception('Unknown difficulty {0}'.format(difficulty))
+        raise Exception('Unknown map selected {0}'.format(difficulty))
 
 
     bg_color = random_color()
@@ -150,16 +148,14 @@ def main(test=False):
                                 window_height=WINDOW_SIZE[1],
                                 window_width=WINDOW_SIZE[0]
                                 )
-    play_menu.add_option('Start',  # When pressing return -> play(DIFFICULTY[0], font)
+    play_menu.add_option('Start',  # When pressing return -> play(SELECT_MAP[0], font)
                          play_function,
-                         DIFFICULTY,
+                         SELECT_MAP,
                          pygame.font.Font(pygameMenu.font.FONT_FRANCHISE, 30))
-    play_menu.add_selector('Select difficulty',
-                           [('1 - Easy', 'EASY'),
-                            ('2 - Medium', 'MEDIUM'),
-                            ('3 - Hard', 'HARD')],
-                           onchange=change_difficulty,
-                           selector_id='select_difficulty')
+    play_menu.add_selector('Select level',
+                           [('1', '1')],
+                           onchange=change_map,
+                           selector_id='select_level')
     play_menu.add_option('Return to main menu', pygameMenu.events.BACK)
 
     # About menu

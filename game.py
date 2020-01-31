@@ -1,3 +1,4 @@
+from main_menu import play_function
 from main_menu import speed
 import pygame
 import os
@@ -60,9 +61,15 @@ class button():
 
 pygame.init()
 pygame.mixer.get_init()
-mutrue= load_sound("data/punch.wav")  # punch.wav
+mutrue = load_sound("data/punch.wav")  # punch.wav
 mufall = load_sound("data/boom.wav")  # boom.mp3
-pygame.mixer.music.load("data/music_one.mp3")  # a.mp3
+#if play_function(level='1'):
+#    pygame.mixer.music.load("data/music_one.mp3")  # a.mp3
+#if play_function(level='2'):
+#    pygame.mixer.music.load("data/intro.mp3")  # a.mp3
+#if play_function(level='3'):
+#    pygame.mixer.music.load("data/music_one.mp3")  # a.mp3
+pygame.mixer.music.load('data/music_one.mp3')
 pygame.mixer.music.play(-1)
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((wix, wiy))
@@ -75,7 +82,9 @@ ed_star = pygame.transform.scale(star, (30, 30))
 hearth = pygame.image.load('data/hearth.png')
 ed_hearth = pygame.transform.scale(hearth, (45, 45))
 
-map_one = [0,2,1,0,1,1,1,2,0,2,3,0,3,1,2,3,1,0,2,3,1,0,1,2,3,0,1,2,0]
+map_one = [0, 2, 1, 0, 1, 1, 1, 2, 0, 2, 3, 0, 3, 1, 2, 3, 1, 0, 2, 3, 1, 0, 1, 2, 3, 0, 1, 2, 0]
+
+is_pause = False
 
 b = random.randint(50, 255)
 c = random.randint(100, 150)
@@ -130,6 +139,16 @@ while lost == 0:
                     else:
                         mufall.play()
                     score += 1
+                elif event.type == pygame.ACTIVEEVENT:
+                    if event.state == 6:
+                        if event.gain == 0:
+                            print("| window minimized")
+                            is_pause = True
+                        elif event.gain == 1:
+                            print("| window opened")
+                            is_pause = False
+            # while is_pause:
+            #     pygame.time.wait(1)
             msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
             if score >= 1:
                 screen.blit(ed_star, (20, 10))
@@ -147,7 +166,7 @@ while lost == 0:
                             screen.fill((c, ac, b))
                         else:
                             screen.fill((ac, c, b))
-                        msg(screen, "Ты победил!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
+                        msg(screen, "YOU WIN!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
                         pygame.display.update()
                         pygame.time.wait(4000)
                         quit()
@@ -163,9 +182,7 @@ if aac == 2:
     screen.fill((c, ac, b))
 else:
     screen.fill((ac, c, b))
-msg(screen, "YOU LOSE ", color=(110, 128, 225), size=100, pos=(-1, -1))
-msg(screen, "by Dan095SS with", color=(110, 108, 225), pos=(-1, wiy // 2 + 40))
-screen.blit(ed_hearth, (350, 400))
+msg(screen, "YOU LOSE ", color=(255, 55, 225), size=100, pos=(-1, -1))
 msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
 pygame.display.update()
 pygame.time.wait(4000)
