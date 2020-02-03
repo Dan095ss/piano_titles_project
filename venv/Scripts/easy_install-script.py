@@ -1,4 +1,4 @@
-#!"C:\Users\Севрюк Даниил\Desktop\PianoTitles\venv\Scripts\python.exe" -x
+#!"C:\Users\Севрюк Даниил\PycharmProjects\untitled\venv\Scripts\python.exe" -x
 # EASY-INSTALL-ENTRY-SCRIPT: 'setuptools==40.8.0','console_scripts','easy_install'
 __requires__ = 'setuptools==40.8.0'
 import re

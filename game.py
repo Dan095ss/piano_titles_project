@@ -1,8 +1,6 @@
-from main_menu import play_function
 from main_menu import speed
 import pygame
 import os
-import random
 from pygame.locals import *
 import random
 
@@ -11,7 +9,8 @@ wiy = 750
 
 a = random.randint(1, 2)
 
-def msg(screen, text, color=(55, 55, 55), size=36, pos=(-1, -1)):
+
+def message(screen, text, color=(55, 55, 55), size=36, pos=(-1, -1)):
     if pos[0] == -1:
         pos = (screen.get_rect().centerx,pos[1])
     if pos[1] == -1:
@@ -79,12 +78,19 @@ screen = pygame.display.set_mode((wix, wiy))
 star = pygame.image.load('data/star.png')
 ed_star = pygame.transform.scale(star, (30, 30))
 
+not_star = pygame.image.load('data/not_star.png')
+not_ed_star = pygame.transform.scale(not_star, (30, 30))
+
 hearth = pygame.image.load('data/hearth.png')
 ed_hearth = pygame.transform.scale(hearth, (45, 45))
 
 map_one = [0, 2, 1, 0, 1, 1, 1, 2, 0, 2, 3, 0, 3, 1, 2, 3, 1, 0, 2, 3, 1, 0, 1, 2, 3, 0, 1, 2, 0]
 
 is_pause = False
+
+a_score = 10
+b_score = 25
+c_score = 35
 
 b = random.randint(50, 255)
 c = random.randint(100, 150)
@@ -139,7 +145,7 @@ while lost == 0:
                     else:
                         mufall.play()
                     score += 1
-                elif event.type == pygame.ACTIVEEVENT:
+                elif event.type == pygame.ACTIVEEVENT: # пауза при сворачивании(в разработке)
                     if event.state == 6:
                         if event.gain == 0:
                             print("| window minimized")
@@ -149,13 +155,13 @@ while lost == 0:
                             is_pause = False
             # while is_pause:
             #     pygame.time.wait(1)
-            msg(screen, "SCORE " + str(score), color=(0, 128, 255), pos=(-1, 30))
-            if score >= 10:
+            message(screen, "SCORE " + str(score), color=(255, 55, 225), pos=(-1, 30))
+            if score >= a_score:
                 screen.blit(ed_star, (20, 10))
                 # добавляем 1-ую звезду
-                if score >= 15:
+                if score >= b_score:
                     screen.blit(ed_star, (50, 10))
-                    if score >= 20:
+                    if score >= c_score:
                         screen.blit(ed_star, (80, 10))
                         pygame.mixer.music.stop()
                         pygame.mixer.music.load("data/win.mp3")  # a.mp3
@@ -166,7 +172,7 @@ while lost == 0:
                             screen.fill((c, ac, b))
                         else:
                             screen.fill((ac, c, b))
-                        msg(screen, "YOU WIN!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
+                        message(screen, "YOU WIN!!!", color=(255, 55, 225), size=75, pos=(-1, -1))
                         pygame.display.update()
                         pygame.time.wait(4000)
                         quit()
@@ -182,10 +188,21 @@ if aac == 2:
     screen.fill((c, ac, b))
 else:
     screen.fill((ac, c, b))
-msg(screen, "YOU LOSE ", color=(255, 55, 225), size=100, pos=(-1, -1))
-msg(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 60))
+message(screen, "YOU LOSE ", color=(255, 55, 225), size=100, pos=(-1, -1))
+message(screen, "Your Score: " + str(score), color=(110, 118, 225), pos=(-1, wiy // 2 + 45))
+if score >= a_score:
+    screen.blit(ed_star, (180, 435))
+    screen.blit(not_ed_star, (215, 435))
+    screen.blit(not_ed_star, (250, 435))
+    if score >= b_score:
+        screen.blit(ed_star, (215, 435))
+        screen.blit(not_ed_star, (250, 435))
+        if score >= c_score:
+            screen.blit(ed_star, (250, 435))
+else:
+    screen.blit(not_ed_star, (180, 435))
+    screen.blit(not_ed_star, (215, 435))
+    screen.blit(not_ed_star, (250, 435))
+    print('no stars')
 pygame.display.update()
 pygame.time.wait(4000)
-# pygame.quit()
-# quit()
-

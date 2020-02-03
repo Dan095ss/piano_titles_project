@@ -34,7 +34,7 @@ surface = None
 # -----------------------------------------------------------------------------
 def change_map(value, level):
     selected, index = value
-    print('Selected difficulty: "{0}" ({1}) at index {2}'.format(selected, level, index))
+    print('Selected level: "{0}" ({1}) at index {2}'.format(selected, level, index))
     SELECT_MAP[0] = level
 
 
@@ -54,14 +54,13 @@ def play_function(level, test=False):
     if level == '1':
         os.system('python game.py')
         sys.exit()
-    elif level == '2':
-        os.system('python game.py')
-        sys.exit()
-    elif level == '3':
-        os.system('python game.py')
-        sys.exit()
+    # elif level == '2':
+    #     os.system('python game.py')
+    #     sys.exit()
+    # elif level == '3':
+    #     os.system('python game.py')
     else:
-        raise Exception('Unknown map selected {0}'.format(difficulty))
+        raise Exception('Unknown map selected {0}'.format(level))
 
 
     bg_color = random_color()
@@ -106,20 +105,13 @@ def main_background():
 
 
 def main(test=False):
-# -------------------------------------------------------------------------
-    # Globals
-    # -------------------------------------------------------------------------
     global clock
     global main_menu
     global surface
 
-    # -------------------------------------------------------------------------
-    # Init pygame
-    # -------------------------------------------------------------------------
     pygame.init()
     os.environ['SDL_VIDEO_CENTERED'] = '1'
 
-    # Create pygame screen and objects
     surface = pygame.display.set_mode(WINDOW_SIZE)
     pygame.display.set_caption('Piano Tiles - Project')
     clock = pygame.time.Clock()
@@ -127,11 +119,6 @@ def main(test=False):
     pygame.mixer.music.load("data/intro.mp3")  # a.mp3
     pygame.mixer.music.play(-1)
 
-    # -------------------------------------------------------------------------
-    # Create menus
-    # -------------------------------------------------------------------------
-
-    # Play menu
     play_menu = pygameMenu.Menu(surface,
                                 bgfun=main_background,
                                 color_selected=COLOR_WHITE,
@@ -165,7 +152,7 @@ def main(test=False):
                                      font=pygameMenu.font.FONT_BEBAS,
                                      font_color=COLOR_BLACK,
                                      font_size_title=30,
-                                     font_title=pygameMenu.font.FONT_8BIT,
+                                     # font_title=pygameMenu.font.FONT_8BIT,
                                      menu_color=MENU_BACKGROUND_COLOR,
                                      menu_color_title=COLOR_WHITE,
                                      menu_height=int(WINDOW_SIZE[1] * 0.6),
@@ -208,9 +195,6 @@ def main(test=False):
     # Configure main menu
     main_menu.set_fps(FPS)
 
-    # -------------------------------------------------------------------------
-    # Main loop
-    # -------------------------------------------------------------------------
     while True:
 
         # Tick
