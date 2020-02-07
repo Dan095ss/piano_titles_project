@@ -2,7 +2,8 @@ import sys
 
 sys.path.insert(0, '../../')
 
-speed = 5
+
+speed = 6
 
 map_one = []
 
